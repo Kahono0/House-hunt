@@ -1,0 +1,29 @@
+<?php
+
+namespace app\validate;
+
+class validate
+{
+  public function name($name)
+  {
+    if(strlen($name)<4){
+      return "Name is too short";
+    }
+    else if(preg_match("/^\W/",$name))
+    {
+      return "Name can only contain letters";
+    }
+    else{
+      return "";
+    }
+  }
+  public function pass($pass)
+  {
+    if(strlen($pass)<6)
+    {
+      return "Password is too short";
+    }
+    return "";
+  }
+
+}
