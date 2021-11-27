@@ -17,28 +17,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $params = database\database::params();
     $conn = mysql($params);
     $val = new validate\validate();
-    $fname = $val->name($_POST["fname"]);
-    if($fname == "")
+    $error = $val->name($_POST["fname"]);
+    if($error == "")
     {
-      $sname = $val->name($_POST["sname"]);
-      if($sname=="")
+      $error = $val->name($_POST["sname"]);
+      if($error=="")
       {
-        $contacts = str_replace($_POST["contacts"],",","");
-        $contacts = $val->name($contacts);
-        if($contacts=="")
+        $error = $val->email($_POST["email"]);
+        if($error=="")
         {
           if($_POST["password"] == $_POST["pass"])
           {
-            $password = $val->pass($password);
-            if($password == "")
+            $error = $val->pass($_POST["password"]);
+            if($error == "")
             {
               //insert
               $account = $_POST["account"];
               $fname = $_POST["fname"];
               $sname = $_POST["sname"];
-              $contacts = $_POST["contacts"];
+              $email = $_POST["email"];
               $password = $_POST["password"];
-              $sql = "INSERT INTO $account(Fname,Sname, Contacts, Password)VALUES('$fname','$sname','$contacts','$password')";
+              $sql = "INSERT INTO $account(Fname,Sname, Email, Password)VALUES('$fname','$sname','$email','$password')";
               if($conn->query($sql) === TRUE)
               {
                 echo 1;
@@ -47,17 +46,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
               echo $conn->error;
               }
             }
-            else echo $password;
+            else echo $error;
           }
           else echo "Passwords do not match";
         }
-        else echo $contacts;
+        else echo $error;
       }
-      else echo $sname;
+      else echo $error;
     }
     else
     {
-      echo $fname;
+      echo $error;
     }
     
   }

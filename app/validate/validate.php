@@ -25,5 +25,12 @@ class validate
     }
     return "";
   }
+  public function email($email)
+  {
+      if(filter_var($email,FILTER_VALIDATE_EMAIL)){
+        return "";
+      }
+    return "Invalid email";
+  }
 
 }
