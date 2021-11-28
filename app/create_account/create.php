@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
               $fname = $_POST["fname"];
               $sname = $_POST["sname"];
               $email = $_POST["email"];
-              $password = $_POST["password"];
+              $password = hash("sha256",$_POST["password"]);
               $sql = "INSERT INTO $account(Fname,Sname, Email, Password)VALUES('$fname','$sname','$email','$password')";
               if($conn->query($sql) === TRUE)
               {
@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     }
     else
     {
-      echo $error;
+      echo $err;
     }
     
   }

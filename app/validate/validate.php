@@ -21,7 +21,7 @@ class validate
   {
     if(strlen($pass)<6)
     {
-      return "Password is too short";
+      return "Password is too short.Should be at least 6 characters.";
     }
     return "";
   }

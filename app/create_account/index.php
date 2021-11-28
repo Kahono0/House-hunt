@@ -14,6 +14,7 @@ $token = $_SESSION["token"] ?? urlencode(base64_encode(random_bytes(32)));
   <body>
     <form method="post" enctype="multipart/form-data">
       <center>
+        <div id="error" style="color:red;"></div>
         <input type="hidden" id="token" value="<?=$token;?>">
       Full name<br><input id="fname" placeholder="first name"><input id="sname" placeholder="Surname"><br><br>
       Email<br><input type="email" id="email"

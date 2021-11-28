@@ -2,7 +2,7 @@
 namespace app\autoload;
 
 
-class Loader
+class loader
 {
     public static function register()
     {

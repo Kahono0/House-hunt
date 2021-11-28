@@ -46,7 +46,7 @@ function create(){
         if(this.responseText == 1){
           window.location.href="/app/login/"
         }
-        else alert(this.responseText)
+        else document.getElementById("error").innerHTML = this.responseText;
       }
     }
     xhttp.open("POST","create.php",true)
