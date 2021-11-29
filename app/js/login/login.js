@@ -45,7 +45,7 @@ tenant.onclick = function (){
     }
     xhttp.open("POST","login.php","true")
     xhttp.send(form)
-    clr()
+    clr
   }
   else alert("error:Empty fields")
   
