@@ -1,16 +1,20 @@
 <?php
 session_start();
 session_regenerate_id();
+
 use app\{
   autoload,
   database,
   validate,
+  errors,
 };
+
+
 require "../autoload/loader.php";
 require "../database/sql.php";
 
 autoload\loader::register();
-
+error\errors::checkSessions();
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   if($_POST["token"] != $_SESSION["token"]){
@@ -27,11 +31,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     $params = database\database::params();
     $conn = mysql($params);
-    $sql = "SELECT Password FROM $account WHERE Email = '$email'";
+    $sql = "SELECT Id,Password FROM $account WHERE Email = '$email'";
     $result = $conn->query($sql);
     if($result->num_rows>0){
       while($row = $result->fetch_assoc()){
         if($row["Password"] == hash("sha256",$password)){
+          $_SESSION[$account] = $row["Id"];
           die("1");
         }
       }
