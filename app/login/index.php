@@ -4,6 +4,11 @@ session_start();
 session_regenerate_id();
 
 $_SESSION["token"] = urlencode(base64_encode(random_bytes(32)));
+require "../autoload/loader.php";
+use app\autoload;
+use app\errors;
+autoload\loader:: register ();
+errors\checkerrors::checkSessions();
 $token = $_SESSION["token"];
 ?>
 <!DOCTYPE html>

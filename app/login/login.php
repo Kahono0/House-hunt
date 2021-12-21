@@ -14,7 +14,7 @@ require "../autoload/loader.php";
 require "../database/sql.php";
 
 autoload\loader::register();
-error\errors::checkSessions();
+//errors\checkerrors::checkSessions();
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   if($_POST["token"] != $_SESSION["token"]){
@@ -36,7 +36,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if($result->num_rows>0){
       while($row = $result->fetch_assoc()){
         if($row["Password"] == hash("sha256",$password)){
-          $_SESSION[$account] = $row["Id"];
+          setcookie($account,$row["Id"],8600*30);
+          echo count($COOKIE);
           die("1");
         }
       }
