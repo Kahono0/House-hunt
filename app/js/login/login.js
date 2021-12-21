@@ -18,7 +18,12 @@ manager.onclick = function (){
         if(this.responseText == 1){
           window.location.href="/";
         }
-        else document.getElementById('error').innerHTML = this.responseText
+        else{
+          document.getElementById('error').innerHTML = this.responseText
+          email.value = "";
+          token.value="";
+          password.value="";
+        }
       }
     }
     xhttp.open("POST","login.php","true")
@@ -40,12 +45,17 @@ tenant.onclick = function (){
         if(this.responseText == 1){
           window.location.href="/";
         }
-        else document.getElementById('error').innerHTML = this.responseText
+        else{
+          document.getElementById('error').innerHTML = this.responseText
+          email.value = ""
+          password.value = ""
+          token.value = ""
+        }
       }
     }
     xhttp.open("POST","login.php","true")
     xhttp.send(form)
-    clr
+    clr()
   }
   else alert("error:Empty fields")
   

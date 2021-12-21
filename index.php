@@ -34,9 +34,11 @@ $types = array("3 Bedroom","2 Bedroom","1 Bedroom","Bedsitter","Double Rooms","S
   <body>
     <div style="display:flex;justify-content:space-around;">
       <?php
-if(!isset($_SESSION["manager"]) || !isset($_SESSION["tenants"])):?>
+if(!isset($_COOKIE["manager"]) && !isset($_COOKIE["tenants"])):?>
       <a href="/app/login/"><div>Login</div></a>
       <a href="/app/create_account/"><div>Create account</div></a>
+      <?php else:?>
+      <a href="/app/login/out.php">Log out</a>
       <?php endif?>
     </div>
     <div class="form">

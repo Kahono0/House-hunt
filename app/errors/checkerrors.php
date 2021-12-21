@@ -6,8 +6,8 @@ class checkerrors
 {
   public static function checksessions()
   {
-    if(isset($_SESSION["manager"]) || isset($_SESSION["tenants"])){
-      echo "logged in";
+    if(isset($_COOKIE["manager"]) || isset($_COOKIE["tenants"])){
+      header("Location: /app/");
     }
   }
 }
