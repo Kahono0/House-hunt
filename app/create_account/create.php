@@ -40,10 +40,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
               $sql = "INSERT INTO $account(Fname,Sname, Email, Password)VALUES('$fname','$sname','$email','$password')";
               if($conn->query($sql) === TRUE)
               {
-                echo 1;
+                $id = $conn->insert_id;
+                setcookie($account,$id,time()+86400*30,"/");
+                die("1");
               }
               else{
-              echo $conn->error;
+              echo $conn->error??"err1";
               }
             }
             else echo $error;

@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if($result->num_rows>0){
       while($row = $result->fetch_assoc()){
         if($row["Password"] == hash("sha256",$password)){
-          setcookie($account,$row["Id"],time()+86000*30,"/");
+          setcookie($account,$row["Id"],time()+86400*30,"/");
           die("1");
         }
       }
