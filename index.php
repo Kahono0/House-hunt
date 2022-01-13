@@ -38,7 +38,11 @@ if(!isset($_COOKIE["manager"]) && !isset($_COOKIE["tenants"])):?>
       <a href="/app/login/"><div>Login</div></a>
       <a href="/app/create_account/"><div>Create account</div></a>
       <?php else:?>
+      <?php if(isset($_COOKIE["manager"]))
+      echo "<script>window.location.href='/app/manager/'</script>";
+      ?>
       <a href="/app/login/out.php">Log out</a>
+      
       <?php endif?>
     </div>
     <div class="form">
