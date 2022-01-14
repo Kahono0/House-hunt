@@ -21,7 +21,8 @@ autoload\loader:: register ();
 <style>
 .profile{
   height:fit-content;
-  text-align: center;
+  display:flex;
+  justify-content: center;
 }
 label img{
   width:37vw;
@@ -57,12 +58,14 @@ $params = $conn = $sql = $res = $id = "";
   Tap on image to change profile pic
 </div>
 <script>
+let img = document.getElementById('dp-display')
 let err = document.getElementById("err")
 let dp = document.getElementById("dp")
 const clear = () => {
   dp.value = ""
 }
 dp.onchange = (function (e){
+  img.src = URL.createObjectURL(e.target.files[0])
   const file=e.target.files[0];
   if(file!=null){
     var form = new FormData()
@@ -74,9 +77,7 @@ dp.onchange = (function (e){
          var error = JSON.parse(this.responseText)
           if(error.err != undefined){
             err.innerHTML = error.err
-          }
-          else{
-            document.getElementById('dp-display').src = error.src
+            img.src = "<?=$manager["Pic"];?>"
           }
       }
     };

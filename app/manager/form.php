@@ -9,10 +9,10 @@ use app\{
 require "../autoload/loader.php";
 require "../database/sql.php";
 autoload\loader::register();
-function savedp($file,$del){
+function savedp($file){
   $id = $_COOKIE["manager"];
   $dpclass = new handleimages\handleimages();
-  $dpname = $dpclass->dp($file,$del);
+  $dpname = $dpclass->dp($file);
   if(!$dpname){
     $obj = [];
     $obj["err"] = "An error occurred. Please try again";
@@ -27,11 +27,6 @@ function savedp($file,$del){
       $obj["err"] = "An error occurred. Please try again";
       echo json_encode($obj);
     }
-    else{
-      $obj = [];
-      $obj["src"] = $dpname;
-      echo json_encode($obj);
-    }
   
   $conn->close();
   $id = $sql = $params = $conn = $dpclass = $dpname = "";
@@ -42,6 +37,6 @@ function savedp($file,$del){
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(!empty($_FILES["dp"])){
-    savedp($_FILES["dp"],$_POST["filename"]);
+    savedp($_FILES["dp"]);
   }
 }

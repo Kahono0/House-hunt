@@ -17,12 +17,13 @@ class handleimages{
     }
     return true;
   }
-  private function save($file,$folder,$tosave,$del){
+  private function save($file,$folder,$tosave){
     $saved = $folder.$_COOKIE["manager"];
-    $save = $folder.$_COOKIE["manager"].".".$this->checkextension($tosave);
-    if($del=="../images/default.jpg" || unlink($del)){
-      move_uploaded_file($file["tmp_name"],$save);
+    $save = $folder.$_COOKIE["manager"].".jpg";
+    if(! move_uploaded_file($file["tmp_name"],$save)){
+      return false;
     }
+    
     $this->compressImage($save,$save);
     
     return $save;
@@ -41,7 +42,7 @@ class handleimages{
                   }
                   return $compress_image;
   }
-  public function dp($file,$del){
+  public function dp($file){
     $folder = "../images/";
     $tosave = $folder.basename($file["name"]);
     if(!$this->checkextension($tosave)){
@@ -50,9 +51,6 @@ class handleimages{
     if(!$this->checkimage($file)){
       return false;
     }
-    if (!$this->save($file,$folder,$tosave,$del)){
-      return false;
-    }
-    return $this->save($file,$folder,$tosave,$del);
+    return $this->save($file,$folder,$tosave);
   }
 }

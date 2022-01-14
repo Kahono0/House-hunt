@@ -37,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
               $sname = $_POST["sname"];
               $email = $_POST["email"];
               $password = hash("sha256",$_POST["password"]);
-              $sql = "INSERT INTO $account(Fname,Sname, Email, Password)VALUES('$fname','$sname','$email','$password')";
+              $sql = "INSERT INTO $account(Fname,Sname, Email, Password,Pic)VALUES('$fname','$sname','$email','$password','../images/default.jpg')";
               if($conn->query($sql) === TRUE)
               {
                 $id = $conn->insert_id;
