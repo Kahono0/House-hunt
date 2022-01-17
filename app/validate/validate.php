@@ -32,5 +32,11 @@ class validate
       }
     return "Invalid email";
   }
+  public function string($str){
+    if($str == filter_var($str,FILTER_SANITIZE_STRING)){
+      return "";
+    }
+    return "Invalid!";
+  }
 
 }

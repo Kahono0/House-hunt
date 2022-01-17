@@ -2,7 +2,7 @@
 
 namespace app\database;
 include "sql.php";
-require "../autoload/loader.php";
+require __DIR__."/../autoload/loader.php";
 use app\{
   autoload,
   database,
@@ -50,11 +50,14 @@ class init{
         Id INT NOT NULL AUTO_INCREMENT,
         Name VARCHAR(100),
         Contact VARCHAR(100),
+        Email VARCHAR(100),
+        Password VARCHAR(100),
         PRIMARY KEY(Id))";
       $tenants = "CREATE TABLE tenants(
         Id INT NOT NULL AUTO_INCREMENT,
         Name VARCHAR(100) NOT NULL,
-        Contact VARCHAR(100),
+        Email VARCHAR(100),
+        Password VARCHAR(100),
         PRIMARY KEY(Id))";
       
       $pics = "CREATE TABLE pics(

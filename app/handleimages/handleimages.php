@@ -3,9 +3,11 @@
 namespace app\handleimages;
 
 class handleimages{
+  public $error;
   private function checkextension($tosave){
     $ext = pathinfo($tosave,PATHINFO_EXTENSION);
     if($ext != "png" && $ext != "jpg" && $ext != "jpeg"){
+      $this->error = "Only png,jpg,jpeg";
       return false;
     }
     return $ext;
@@ -13,6 +15,7 @@ class handleimages{
   private function checkimage($file){
     $check = getimagesize($file["tmp_name"]);
     if($check==false){
+      $this->error = "This is not a real image";
       return $check;
     }
     return true;
@@ -21,6 +24,7 @@ class handleimages{
     $saved = $folder.$_COOKIE["manager"];
     $save = $folder.$_COOKIE["manager"].".jpg";
     if(! move_uploaded_file($file["tmp_name"],$save)){
+      $this->error = "Could not be saved. Please try again";
       return false;
     }
     
@@ -45,6 +49,10 @@ class handleimages{
   public function dp($file){
     $folder = "../images/";
     $tosave = $folder.basename($file["name"]);
+    if($file["tmp_name"] == ""){
+      $this->error = "Error parsing file!. Try a different one";
+      return false;
+    }
     if(!$this->checkextension($tosave)){
       return false;
     }
