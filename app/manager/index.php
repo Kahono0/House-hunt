@@ -49,6 +49,14 @@ label img{
   border-radius:3px;
   margin:0.5em;
 }
+#unit-form{
+  text-align: center;
+}
+textarea{
+  width:50vw;
+  height:15vh;
+  padding:1em;
+  border-radius:10px;
 </style>
 <body>
   <div id="err"></div>
@@ -91,8 +99,30 @@ $params = $conn = $sql = $res = $id = "";
     <br>
     <span id="xtype"></span><input type="text" id="contact">
     <br><button id="add">add</button>
-    <div><button id="hide-form">cancel</button><button id="submit-contact">Finish</button></di>
+    <div><button id="hide-form">cancel</button><button id="submit-contact">Finish</button></div>
   </div>
+  <div id="add-unit"><button id="btn-unit">+Add unit(s)</button></div>
+</div>
+<div id="unit-form" style="display:none;">
+  <form action="" method="post" enctype="multipart/form-data">
+  <div class="name">Name of unit, house<br><input type="text" id="unit-name"></div>
+  <div class="type">Type of unit<br>
+    <select id="unit-type">
+      <option disabled selected></option>
+      <?php
+        $arr_val = array ("3-bed"=>"3 bedroom","2-bed"=>"2 bedroom","1-bed"=>"1 bedroom","bedsitter"=>"bedsitter","d-room"=>"double room","s-room"=>"single room");
+        foreach ($arr_val as $val=>$key):?>
+      <option value="<?=$val;?>"><?=$key;?></option>
+      <?php endforeach;?>
+    </select>
+  </div>
+  <div class="desc">Detailed description<br><textarea id="desc"></textarea></div>
+  <div class="quantity">No of units<br><input type="number" id="quantity"></div>
+  <div class="images" id="images">Images<input type="file" id="unit-image" style="display:none"><label for="unit-image"><img src="../images/add.jpg"></label></div>
+  <div class="location">Location<br><input type="url" id="location"></div>
+  <div id="sub"><input type="button" id="sub-unit" value="+Add"></div>
+  </form>
+  
 </div>
 <script>
 let img = document.getElementById('dp-display')
@@ -101,7 +131,7 @@ let dp = document.getElementById("dp")
 const clear = () => {
   dp.value = ""
 }
-dp.onchange = (function (e){
+dp.onchange = function (e){
   img.src = URL.createObjectURL(e.target.files[0])
   const file=e.target.files[0];
   if(file!=null){
@@ -125,7 +155,7 @@ dp.onchange = (function (e){
   clear()
   }
   
-});
+};
 
 //contacts
 function del(arr,txt){
@@ -210,4 +240,60 @@ function save(arrContacts){
   clear()
 }
 
+//add unit
+
+let unitBtn = document.getElementById("btn-unit")
+let unitForm = document.getElementById("unit-form")
+let subUnit = document.getElementById("sub-unit")
+let unitName = document.getElementById("unit-name")
+let unitType = document.getElementById("unit-type")
+let description = document.getElementById("desc")
+let quantity = document.getElementById("quantity")
+let location = document.getElementById("location")
+let unitImg = document.getElementById("unit-image")
+let dispImg = document.getElementById("images")
+let unitImages = []
+function validate(str,type){
+     let formatstr = //
+}
+
+unitBtn.onclick = function (){
+  unitForm.style.display = "block"
+  unitImg.onchange=function (e){
+    var src = URL.createObjectURL(e.target.files[0])
+    dispImg.innerHTML = "<div><img src='"+src+"'></div>"
+    const file=e.target.files[0];
+    unitImages.push(file)
+    subUnit.onclick = function (){
+         if(validate(unitName.value,"string")){
+              if(validate(description.value,"string")){
+                   var x,y = getLocation(location)
+              }
+         }
+         if(x=="" && y=""){
+              alert("Invalid form data")
+         }
+         var form = new FormData()
+         form.append(unitName.value,"unit_name")
+         form.append(unitType.value,"unit_type")
+         form.append(description.value,"description")
+         form.append(quantity.value,"quantity")
+         form.append(unitImages,"images[]")
+         form.append(x,"x")
+         form.append(y,"y")
+         var xhttp=new XMLHttpRequest()
+         xhttp.onreadystatechange=function (){
+              if(this.readyState==4 && this.status==200){
+            
+                 alert(this.responseText)
+              }
+         };
+          xhttp.open("POST","form.php",true);
+
+          xhttp.send(form)
+         
+         
+         
+    }
+}
 </script>
