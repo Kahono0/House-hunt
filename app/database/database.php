@@ -7,7 +7,7 @@ class database{
   {
   $params = [];
   $params["host"] = "0.0.0.0";
-  $params["user"] = "root";
+  $params["user"] = "jack";
   $params["password"] = "kahono";
   $params["db"] = "Househunt";
   return $params;

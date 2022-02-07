@@ -180,6 +180,20 @@ const display = (arr,txt) => {
   id = "aa"
   show.innerHTML += "<span class='con'>"+txt+"<sup id='rem'>×</sup></span>"
 }
+const val = (type, value) =>{
+     var format = ""
+     switch(type){
+          case "email":
+               format = /[#$'&_&\-+()\/*":;!?]/
+               break
+          case "phone":
+               format = /[a-zA-Z\W]/
+               break
+          case "facebook":
+               format = /[]/
+               
+     }
+}
 let arrContacts = []
 btn.onclick = function(){
   showContactForm()
@@ -196,6 +210,7 @@ btn.onclick = function(){
     contact.style.display = "inline"
     add.style.display = "block"
     add.onclick = function (){
+      val(select.value,contact.value)
       if(!arrContacts[select.value]){
         arrContacts[select.value] = []
       }
@@ -241,7 +256,7 @@ function save(arrContacts){
 }
 
 //add unit
-
+/*
 let unitBtn = document.getElementById("btn-unit")
 let unitForm = document.getElementById("unit-form")
 let subUnit = document.getElementById("sub-unit")
@@ -254,7 +269,7 @@ let unitImg = document.getElementById("unit-image")
 let dispImg = document.getElementById("images")
 let unitImages = []
 function validate(str,type){
-     let formatstr = //
+     let formatstr = /;";"/
 }
 
 unitBtn.onclick = function (){
@@ -295,5 +310,5 @@ unitBtn.onclick = function (){
          
          
     }
-}
+}*/
 </script>
