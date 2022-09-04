@@ -6,7 +6,7 @@ class database{
   public static function params()
   {
   $params = [];
-  $params["host"] = "0.0.0.0";
+  $params["host"] = "localhost";
   $params["user"] = "jack";
   $params["password"] = "kahono";
   $params["db"] = "Househunt";
